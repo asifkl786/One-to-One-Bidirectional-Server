@@ -84,8 +84,12 @@ private static final Logger logger = LoggerFactory.getLogger(UserController.clas
 		return new ResponseEntity<>(user,HttpStatus.OK);
 	}
 	
-	// Build Search User Profile REST API
 	
+	
+	
+	/* This Section Represent to Profile Entity*/
+	
+	// Build Search User Profile REST API
 	@GetMapping("/searchProfile")
 	public ResponseEntity<List<Profile>> searchUserByProfile(@RequestParam String query){
 		logger.info("Recived Request to Search UserProfile with Id: {}",query);

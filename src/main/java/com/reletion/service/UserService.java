@@ -13,6 +13,10 @@ public interface UserService {
 	UserDTO updateUser(Long id , UserDTO userDTO);
 	void deleteUser(Long id);
 	List<UserDTO> searchUser(String query);
+	
+	
+	
+	/* This Section Represent to Profile Entity*/
 	List<Profile> searchUserByProfile(String query);
 
 }

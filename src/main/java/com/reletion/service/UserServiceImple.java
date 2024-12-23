@@ -110,19 +110,29 @@ public class UserServiceImple implements UserService {
 	public List<UserDTO> searchUser(String query) {
 		logger.info("{} Search User With Id : ",query);
 		List<User> users = userRepository.searchUser(query);
+		if (users.isEmpty()) {
+            throw new ResourceNotFoundException("No profile found in with query: " + query);
+        }
+		//.orElseThrow(() -> new ResourceNotFoundException("User is not exists with given id :"  + id));
 		logger.info("{} User Successfully Found",query);
 		return users.stream().map(userMapper::toDTO).collect(Collectors.toList());
 	}
 	
 	
-	// Search User By Profile Field
 	
+	/* This Section Represent to Profile Entity*/
+	
+	// Search User By Profile Field
 		@Override
 		public List<Profile> searchUserByProfile(String query) {
 			logger.info("{} Search User By Profile With Id : ",query);
-			List<Profile> usersProfile = profileRepository.searchUserByProfile(query);
-			logger.info("{} User Profile Successfully Found",usersProfile.size());
-			return usersProfile.stream().collect(Collectors.toList());
+			List<Profile> usersProfiles = profileRepository.searchUserByProfile(query);
+			if (usersProfiles.isEmpty()) {
+	            throw new ResourceNotFoundException("No profile found in with query: " + query);
+	        }
+			//.orElseThrow(() -> new ResourceNotFoundException("User is not exists with given id :"  + id));
+			logger.info("{} User Profile Successfully Found",usersProfiles.size());
+			return usersProfiles.stream().collect(Collectors.toList());
 		}
 	
 }
